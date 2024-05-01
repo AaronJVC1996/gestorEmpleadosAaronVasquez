@@ -18,4 +18,7 @@ public class BDConexion {
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());
         }
     }
+    public Connection getConexion() {
+        return conectar;
+    }
 }
