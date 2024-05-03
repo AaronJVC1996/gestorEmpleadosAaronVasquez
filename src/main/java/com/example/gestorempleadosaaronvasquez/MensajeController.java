@@ -20,5 +20,3 @@ public class MensajeController {
         stage.close();
     }
 }
-//todo ver la separacion del mensaje con su derecha y ver la separacion del boton aceptar con su derecha y por abajo
-// ver como colocar el simbolo imagen de ! en azul, me quede al final de la pagina 2 del pdf
