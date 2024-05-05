@@ -35,7 +35,7 @@
                     <Insets top="30" />
                 </padding>
                 <Button text="Editar" onAction="#editarEmpleado"/>
-                <Button text="Eliminar" onAction="#eliminarEmpleado"/>
+                <Button text="Eliminar" onAction="#eliminarEmpleado" style="-fx-text-fill: red; -fx-font-weight: bold;"/>
             </HBox>
         </VBox>
     </HBox>
