@@ -37,5 +37,8 @@
     <TextField fx:id="salarioTextField" maxWidth="155"/>
     <Label/>
     <Label/>
+    <HBox spacing="40">
     <Button text="Insertar" onAction="#insertarEmpleado"/>
+    <Button text="Cargar Datos" onAction="#cargarDatosDesdeArchivo"/>
+    </HBox>
 </VBox>

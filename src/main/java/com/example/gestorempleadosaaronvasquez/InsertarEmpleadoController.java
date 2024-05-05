@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -61,6 +64,42 @@ public class InsertarEmpleadoController {
                 // Si introducimos letras en el salario por ejemplo.
                 System.out.println("Error al insertar el empleado en la base de datos: " + e.getMessage());
             }
+        }
+    }
+
+    @FXML
+    private void cargarDatosDesdeArchivo() {
+        try (BufferedReader br = new BufferedReader(new FileReader("trabajadores.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(";");
+                if (partes.length == 3) {
+                    String nombre = partes[0];
+                    String puesto = partes[1];
+                    String salario = partes[2];
+                    insertarTrabajador(nombre, puesto, salario);
+                } else {
+                    System.out.println("Error: La línea no tiene el formato correcto");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+
+    private void insertarTrabajador(String nombre, String puesto, String salario) {
+        try {
+            conexionBD = new BDConexion();
+            Connection conexion = conexionBD.getConexion();
+            String consulta = "INSERT INTO empleados (nombre, puesto, salario, fecha) VALUES (?, ?, ?, CURDATE())";
+            PreparedStatement declaracion = conexion.prepareStatement(consulta);
+            declaracion.setString(1, nombre);
+            declaracion.setString(2, puesto);
+            declaracion.setString(3, salario);
+            declaracion.executeUpdate();
+            System.out.println("Se ha ingresado el empleado " + nombre + " correctamente");
+        } catch (SQLException e) {
+            System.out.println("Error al insertar el empleado " + nombre + " en la base de datos: " + e.getMessage());
         }
     }
 }
