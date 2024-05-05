@@ -2,15 +2,17 @@ package com.example.gestorempleadosaaronvasquez;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Main extends Application {
-
     @Override
     public void start(Stage primaryStage) throws IOException {
         // Crear un TabPane que tendra las pestañas
@@ -26,8 +28,18 @@ public class Main extends Application {
         consultaTab.setContent(FXMLLoader.load(Main.class.getResource("ConsultaEmpleado.fxml")));
         tabPane.getTabs().add(consultaTab);
 
-        // Crear la escena y poner el tabpane como la principal, con un tamaño predefinido por mi
-        Scene scene = new Scene(tabPane, 500, 350);
+        // Crear un Label para el texto "Gestor de Empleados"
+        Label titleLabel = new Label("Gestor de Empleados");
+        titleLabel.setStyle("-fx-font-size: 26px;");
+
+        // Crear un VBox que contendrá el Label y el TabPane
+        VBox root = new VBox(titleLabel, tabPane);
+        root.setAlignment(Pos.CENTER);
+        // Establecer la altura minima de las pestañas para permitir espacio para el texto
+        tabPane.setTabMinHeight(30);
+
+        // Crear la escena y poner el VBox como el contenido principal
+        Scene scene = new Scene(root, 500, 425);
 
         // Establecer la escena en el escenario principal
         primaryStage.setScene(scene);
@@ -50,7 +62,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -65,6 +76,10 @@ public class Main extends Application {
 
 
     /*
+
+    Este codigo era el que tenia al principio hasta que me di cuenta que estaba mal, lo dejo aqui para
+    poder ver parte del codigo y reutilizarlo
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("InsertarEmpleado.fxml"));

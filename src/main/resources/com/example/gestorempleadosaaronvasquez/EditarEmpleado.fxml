@@ -6,9 +6,42 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.gestorempleadosaaronvasquez.EditarEmpleadoController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<VBox spacing="10.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.gestorempleadosaaronvasquez.EditarEmpleadoController">
 
-</AnchorPane>
+<padding>
+    <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+</padding>
+<Label fx:id="idLabel"/>
+<!-- Campos de edición para el nombre, puesto y salario -->
+<Label text="NOMBRE:"/>
+<TextField fx:id="nombreTextField"/>
+
+    <Label text="PUESTO:"/>
+    <ComboBox fx:id="puestoComboBox">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Scada Manager"/>
+                <String fx:value="Sales Manager"/>
+                <String fx:value="Product Owner"/>
+                <String fx:value="Product Manager"/>
+                <String fx:value="Analyst Programmer"/>
+                <String fx:value="Junior Programmer"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+<Label text="SALARIO:"/>
+<TextField fx:id="salarioTextField"/>
+
+<!-- Botones para guardar cambios y cancelar -->
+<HBox spacing="60.0" alignment="CENTER">
+    <padding>
+        <Insets top="15.0"/>
+    </padding>
+    <Button text="Modificar" onAction="#guardarCambios"/>
+    <Button text="Cancelar" onAction="#cerrarVentana"/>
+</HBox>
+</VBox>

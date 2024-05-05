@@ -18,10 +18,6 @@
     <padding>
         <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
     </padding>
-
-    <HBox alignment="CENTER">
-        <Label text="Gestor empleados" style="-fx-font-size: 18px;"/>
-    </HBox>
     <Label text="Nombre:"/>
     <TextField fx:id="nombreTextField" maxWidth="155"/>
     <Label text="Puesto:"/>

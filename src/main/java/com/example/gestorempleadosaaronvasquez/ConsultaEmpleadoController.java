@@ -1,9 +1,14 @@
 package com.example.gestorempleadosaaronvasquez;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class ConsultaEmpleadoController {
@@ -100,5 +105,31 @@ public class ConsultaEmpleadoController {
         // Limpiar la lista y volver a cargar los empleados desde la base de datos
         empleadosListView.getItems().clear();
         cargarEmpleados();
+    }
+    @FXML
+    private void editarEmpleado() {
+        // Obtener el nombre del empleado seleccionado en el ListView
+        String nombreEmpleado = empleadosListView.getSelectionModel().getSelectedItem();
+
+        // Verificar si se ha seleccionado un empleado antes de abrir la ventana de edicion
+        if (nombreEmpleado != null && !nombreEmpleado.isEmpty()) {
+            // Abrir la ventana de edicion y pasar el nombre del empleado seleccionado
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("EditarEmpleado.fxml"));
+                Parent root = loader.load();
+                EditarEmpleadoController controller = loader.getController();
+                controller.initData(nombreEmpleado); // Pasar el nombre del empleado al controlador de edición
+                Stage stage = new Stage();
+                Scene scene = new Scene(root, 400, 300);
+                stage.setScene(scene);
+                stage.setTitle("Modificar Empleado");
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Mostrar un mensaje de error si no se ha seleccionado ningún empleado
+            System.out.println("Error: No se ha seleccionado ningún empleado para editar.");
+        }
     }
 }
