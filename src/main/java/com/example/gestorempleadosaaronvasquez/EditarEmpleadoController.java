@@ -59,7 +59,7 @@ public class EditarEmpleadoController {
         // Obtener los nuevos valores de los campos de edición
         String nuevoNombre = nombreTextField.getText();
         String nuevoPuesto = puestoComboBox.getValue(); // Obtener el valor seleccionado del ComboBox
-        int nuevoSalario = (int) Long.parseLong(salarioTextField.getText());
+        int nuevoSalario = (int) Long.parseLong(salarioTextField.getText()); // Long para que no de error al llegar a 10 cifras de 9, casteado.
 
         // Actualizar los datos del empleado en la base de datos
         BDConexion conexionBD = new BDConexion();
@@ -68,7 +68,7 @@ public class EditarEmpleadoController {
             try (PreparedStatement declaracion = conexion.prepareStatement(consulta)) {
                 declaracion.setString(1, nuevoNombre);
                 declaracion.setString(2, nuevoPuesto);
-                declaracion.setDouble(3, nuevoSalario);
+                declaracion.setInt(3, nuevoSalario);
                 declaracion.setString(4, nombreEmpleado); // Usamos el nombre original del empleado como referencia para la actualizacion
 
                 // Ejecutar la consulta de actualizacion
